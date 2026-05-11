@@ -1,5 +1,6 @@
 from storage import load_expenses, save_expenses
 from logic import sum_total, add_expense, list_expenses
+from logic import get_available_months, filter_by_month, sum_by_category
 
 CATEGORIES = ["Ēdiens", "Transports", "Izklaide", "Komunālie maksājumi", "Veselība", "Iepirkšanās", "Cits"] 
 
@@ -9,6 +10,10 @@ def show_menu():
     """
     print("\n1) Pievienot izdevumu") 
     print("2) Parādīt izdevumus") 
+    print("3) Filtrēt pēc mēneša")
+    print("4) Kopsavilkums pa kategorijām")
+    print("5) Dzēst izdevumu")
+    print("6) Eksportēt CSV")
     print("7) Iziet")
 
     return input("\nIzvēlies darbību (1-7): ").strip()
@@ -39,6 +44,29 @@ def main():
             print(list_expenses(expenses))
             print("Kopsumma: ")
             print(f"{sum_total(expenses):.2f} EUR")
+
+        elif choice=="3":
+            months=get_available_months(expenses)
+
+            print("\nPieejamie mēneši:")
+            for i, (year, month) in enumerate(months, start=1):
+                print(f"{i}) {year}-{month:02d}") #02d - mēnesis vienmēr sastāves no 2 cipariem.
+            
+            n=int(input("Izvēlies mēnesi: "))
+
+            if n<1 or n>len(months):
+                print("Nepareiza izvēle.")
+                continue #Lai programma tomēr turpinātu strādāt, nevis immediately apstātos.
+
+            selected_year, selected_month=months[n - 1]
+
+            filtered=filter_by_month(expenses, selected_year, selected_month)
+
+            print(f"\n{selected_year}-{selected_month:02d} izdevumi: ")
+
+            print(list_expenses(filtered))
+
+            print(f"\nKopā: {sum_total(filtered):.2f} EUR ({len(filtered)} ieraksti)")
 
         elif choice=="7": 
             print("Visu labu!") 
