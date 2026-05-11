@@ -38,9 +38,9 @@ def main():
                 save_expenses(expenses) 
 
         elif choice=="2":
-            print("Izdevumi: ")
+            print("\nIzdevumi: ")
             print(list_expenses(expenses))
-            print("Kopsumma: ")
+            print("\nKopsumma: ")
             print(f"{sum_total(expenses):.2f} EUR")
 
         elif choice=="3":
@@ -76,6 +76,24 @@ def main():
 
             print(f"KOPĀ: {sum_total(expenses):.2f} EUR")
 
+        elif choice=="5":
+            print("\nIzdevumi: ")
+            print(list_expenses(expenses))
+
+            text=int(input("Kuru dzēst? (numurs vai 0, lai atceltu)").strip())
+
+            if text==0:
+                print("Nekas netika izdzēsts.")
+
+            elif 1<=text<=len(expenses):
+                n=expenses.pop(text-1)
+
+                save_expenses(expenses)
+
+                print(f"Dzēsts: {n['date']} | {n['amount']:.2f} EUR | {n['category']} | {n['description']}")
+
+            else:
+                print("Nepareizs numurs.")
 
         elif choice=="7": 
             print("Visu labu!") 
