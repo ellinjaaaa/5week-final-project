@@ -1,3 +1,5 @@
+from datetime import datetime
+
 def sum_total(expenses):
     '''
     Sasummē kopā pilnīgi visas izmaksas ar sum() un for cikla palīdzību.
@@ -42,3 +44,21 @@ def list_expenses(expenses):
         lines.append(f"{i+1}. {expense['date']} | {expense['amount']:.2f} EUR | {expense['category']} | {expense['description']}")
     
     return "\n".join(lines) #\n - katrs elements izdrukāts jaunā rindā; join - saliek vienā tekstā. 
+
+def filter_by_month(expenses, year, month): 
+    """
+    Atgriež izdevumus, kuru datums ir norādītajā mēnesī.
+    """ 
+    result = [] 
+
+    for expense in expenses: 
+        d = datetime.strptime(expense["date"], "%Y-%m-%d") 
+        if d.year == year and d.month == month: 
+            result.append(expense) 
+    return result 
+
+#def sum_by_category():
+
+#def get_available_motnhs():
+
+#def 
