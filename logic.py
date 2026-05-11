@@ -57,7 +57,17 @@ def filter_by_month(expenses, year, month):
             result.append(expense) 
     return result 
 
-#def sum_by_category():
+def sum_by_category(expenses): 
+    """
+    Atgriež vārdnīcu: {kategorija: summa}.
+    """ 
+    totals = {} 
+
+    for expense in expenses: 
+        categ=expense["category"] 
+        totals[categ]=totals.get(categ, 0) + expense["amount"] 
+
+    return {categ: round(total, 2) for categ, total in totals.items()} 
 
 #def get_available_motnhs():
 
