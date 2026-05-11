@@ -6,6 +6,8 @@ def sum_total(expenses):
     '''
     return sum(expense["amount"] for expense in expenses)
 
+CATEGORIES = ["Ēdiens", "Transports", "Izklaide", "Komunālie maksājumi", "Veselība", "Iepirkšanās", "Cits"] 
+
 def add_expense(expenses, date, amount, category, description):
     '''
     Pievieno izdevumu (datums | izmaksas | kategorija | apraksts). Ja nekas netiek ievadīts, negatīvs izdevums vai nav skaitlis - atbilstoši
@@ -19,6 +21,9 @@ def add_expense(expenses, date, amount, category, description):
     if not date or not amount or not category or not description:
         return "Nevar būt tukša ievade."
     
+    if category not in CATEGORIES:
+        return f"Nezināma kategorija. Izvēlies no: {', '.join(CATEGORIES)}" #Validē kategoriju izvēli. Ar join palīdzību sarasts tiek kopā skaisti sarakstīts ar komatime.
+
     try:
         amount=float(amount)
     except ValueError:
@@ -45,7 +50,7 @@ def list_expenses(expenses):
     
     return "\n".join(lines) #\n - katrs elements izdrukāts jaunā rindā; join - saliek vienā tekstā. 
 
-def get_available_motnhs(expenses):
+def get_available_months(expenses):
     """
     Atrod un sakārto gada mēnešus secīgi (unikāli, bez dublikātiem).
     """
@@ -79,6 +84,4 @@ def sum_by_category(expenses):
         categ=expense["category"] 
         totals[categ]=totals.get(categ, 0) + expense["amount"] 
 
-    return {categ: round(total, 2) for categ, total in totals.items()} 
-
-#def 
+    return {categ: round(total, 2) for categ, total in totals.items()}
