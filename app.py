@@ -28,7 +28,7 @@ def main():
 
         if choice=="1": 
             today=date.today()
-            
+
             other_date=input(f"Datums (YYYY-MM-DD) [{today}]: ")
             amount=input("Cena: ")
             category=input("Kategorija: 1) Ēdiens, 2) Transports, 3) Izklaide, 4) Komunālie maksājumi, 5) Veselība, 6) Iepirkšanās, 7) Cits: ")
@@ -41,8 +41,10 @@ def main():
                 save_expenses(expenses) 
 
         elif choice=="2":
-            print("\nIzdevumi: ")
+            print(f"\n{'Datums':<12} {'Summa':>15} {'Kategorija':>21} {'Apraksts':>17}")
+            print("-" * 80) 
             print(list_expenses(expenses))
+            print("-" * 80) 
             print("\nKopsumma: ")
             print(f"{sum_total(expenses):.2f} EUR")
 
@@ -65,7 +67,15 @@ def main():
 
             print(f"\n{selected_year}-{selected_month:02d} izdevumi: ")
 
+            print("-" * 80) 
+
+            print(f"{'Datums':<12} {'Summa':>15} {'Kategorija':>21} {'Apraksts':>17}")
+
+            print("-" * 80) 
+
             print(list_expenses(filtered))
+
+            print("-" * 80) 
 
             print(f"\nKopā: {sum_total(filtered):.2f} EUR ({len(filtered)} ieraksti)")
 
@@ -74,8 +84,12 @@ def main():
 
             print("\nKopsavilkums pa kategorijām: ")
 
+            print("-" * 50) 
+
             for category, amount in catsum.items():
-                print(f"{category}: {amount:.2f} EUR")
+                print(f"{category:<21}: {amount:<10.2f} EUR")
+
+            print("-" * 50) 
 
             print(f"KOPĀ: {sum_total(expenses):.2f} EUR")
 
