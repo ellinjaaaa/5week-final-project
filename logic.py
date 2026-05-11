@@ -39,6 +39,6 @@ def list_expenses(expenses):
     lines=[]
 
     for i, expense in enumerate(expenses):
-        lines.append(f"{i+1}. {expense['date']} EUR | {expense['amount']:.2f} | {expense['category']} | {expense['description']}")
+        lines.append(f"{i+1}. {expense['date']} | {expense['amount']:.2f} EUR | {expense['category']} | {expense['description']}")
     
     return "\n".join(lines) #\n - katrs elements izdrukāts jaunā rindā; join - saliek vienā tekstā. 
