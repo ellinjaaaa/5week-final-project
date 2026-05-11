@@ -1,4 +1,3 @@
-import sys
 from storage import load_expenses, save_expenses
 from logic import sum_total, add_expense, list_expenses
 
@@ -12,4 +11,41 @@ def show_menu():
     print("2) Parādīt izdevumus") 
     print("7) Iziet")
 
-    return input("\nIzvēlies darbību (1-7): ")
+    return input("\nIzvēlies darbību (1-7): ").strip()
+
+def main(): 
+    """
+    Galvenā programma, kas mijiedarbojas ar lietotāju, atkarībā no iepriekšējās izvēles.
+    """ 
+    expenses = load_expenses() 
+
+    while True: 
+        choice=show_menu() 
+
+        if choice=="1": 
+            date=input("Datums (YYYY-MM-DD) [2026-05-11]: ")
+            amount=input("Cena: ")
+            category=input("Kategorija: 1) Ēdiens, 2) Transports, 3) Izklaide, 4) Komunālie maksājumi, 5) Veselība, 6) Iepirkšanās, 7) Cits: ")
+            description=input("Apraksts: ")
+
+            message=add_expense(expenses, date, amount, category, description)
+            print(message)
+
+            if message.startswith("Pievienots"):
+                save_expenses(expenses) 
+
+        elif choice=="2":
+            print("Izdevumi: ")
+            print(list_expenses(expenses))
+            print("Kopsumma: ")
+            print(f"{sum_total(expenses):.2f} EUR")
+
+        elif choice=="7": 
+            print("Visu labu!") 
+            break 
+
+        else:
+            print("Nezināma komanda.")
+        
+if __name__ == "__main__": 
+    main() 
