@@ -2,8 +2,6 @@ from storage import load_expenses, save_expenses
 from logic import sum_total, add_expense, list_expenses
 from logic import get_available_months, filter_by_month, sum_by_category
 
-CATEGORIES = ["Ēdiens", "Transports", "Izklaide", "Komunālie maksājumi", "Veselība", "Iepirkšanās", "Cits"] 
-
 def show_menu():
     """
     Parāda galveno izvēlni un atgriež lietotāja izveli.
@@ -67,6 +65,17 @@ def main():
             print(list_expenses(filtered))
 
             print(f"\nKopā: {sum_total(filtered):.2f} EUR ({len(filtered)} ieraksti)")
+
+        elif choice=="4":
+            catsum=sum_by_category(expenses)
+
+            print("\nKopsavilkums pa kategorijām: ")
+
+            for category, amount in catsum.items():
+                print(f"{category}: {amount:.2f} EUR")
+
+            print(f"KOPĀ: {sum_total(expenses):.2f} EUR")
+
 
         elif choice=="7": 
             print("Visu labu!") 
