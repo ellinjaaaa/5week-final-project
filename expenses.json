@@ -22,5 +22,17 @@
     "amount": 15.678,
     "category": "Iepirkšanās",
     "description": "T-krekls"
+  },
+  {
+    "date": "2026-05-03",
+    "amount": 3.547,
+    "category": "Izklaide",
+    "description": "Kino e-biļete"
+  },
+  {
+    "date": "2026-05-06",
+    "amount": 20.0,
+    "category": "Komunālie maksājumi",
+    "description": "Elektrība"
   }
 ]
