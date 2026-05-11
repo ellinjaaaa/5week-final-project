@@ -27,4 +27,18 @@ def add_expense(expenses, date, amount, category, description):
     
     expenses.append({"date":date, "amount":amount, "category":category, "description":description})
 
-    return f"Pievienots: {date} | {amount:.2f} | {category} | {description}"
+    return f"Pievienots: {date} | {amount:.2f} EUR | {category} | {description}"
+
+def list_expenses(expenses):
+    '''
+    Atgriež sanumurētu sarakstu ar saistītajiem datiem no expenses saraksta. Citādāk - nav izdevumu.
+    '''
+    if not expenses:
+        return "Nav izdevumu."
+    
+    lines=[]
+
+    for i, expense in enumerate(expenses):
+        lines.append(f"{i+1}. {expense['date']} EUR | {expense['amount']:.2f} | {expense['category']} | {expense['description']}")
+    
+    return "\n".join(lines) #\n - katrs elements izdrukāts jaunā rindā; join - saliek vienā tekstā. 
