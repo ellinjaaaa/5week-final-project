@@ -1,6 +1,7 @@
 from storage import load_expenses, save_expenses
 from logic import sum_total, add_expense, list_expenses
 from logic import get_available_months, filter_by_month, sum_by_category
+from datetime import date
 
 def show_menu():
     """
@@ -26,12 +27,14 @@ def main():
         choice=show_menu() 
 
         if choice=="1": 
-            date=input("Datums (YYYY-MM-DD) [2026-05-11]: ")
+            today=date.today()
+            
+            other_date=input(f"Datums (YYYY-MM-DD) [{today}]: ")
             amount=input("Cena: ")
             category=input("Kategorija: 1) Ēdiens, 2) Transports, 3) Izklaide, 4) Komunālie maksājumi, 5) Veselība, 6) Iepirkšanās, 7) Cits: ")
             description=input("Apraksts: ")
 
-            message=add_expense(expenses, date, amount, category, description)
+            message=add_expense(expenses, other_date, amount, category, description)
             print(message)
 
             if message.startswith("Pievienots"):
