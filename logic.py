@@ -45,6 +45,18 @@ def list_expenses(expenses):
     
     return "\n".join(lines) #\n - katrs elements izdrukāts jaunā rindā; join - saliek vienā tekstā. 
 
+def get_available_motnhs(expenses):
+    """
+    Atrod un sakārto gada mēnešus secīgi (unikāli, bez dublikātiem).
+    """
+    months=set() #Lai nebūtu dublikātu.
+
+    for expense in expenses:
+        d=datetime.strptime(expense["date"], "%Y-%m-%d")
+        months.add((d.year, d.month))
+
+    return sorted(months)
+
 def filter_by_month(expenses, year, month): 
     """
     Atgriež izdevumus, kuru datums ir norādītajā mēnesī.
@@ -68,7 +80,5 @@ def sum_by_category(expenses):
         totals[categ]=totals.get(categ, 0) + expense["amount"] 
 
     return {categ: round(total, 2) for categ, total in totals.items()} 
-
-#def get_available_motnhs():
 
 #def 
