@@ -8,6 +8,16 @@ def sum_total(expenses):
 
 CATEGORIES = ["Ēdiens", "Transports", "Izklaide", "Komunālie maksājumi", "Veselība", "Iepirkšanās", "Cits"] 
 
+def is_valid_date(text): 
+    """
+    Pārbauda, vai teksts ir derīgs datums YYYY-MM-DD formātā.
+    """ 
+    try: 
+        datetime.strptime(text, "%Y-%m-%d") 
+        return True 
+    except ValueError: 
+        return False
+
 def add_expense(expenses, date, amount, category, description):
     '''
     Pievieno izdevumu (datums | izmaksas | kategorija | apraksts). Ja nekas netiek ievadīts, negatīvs izdevums vai nav skaitlis - atbilstoši
@@ -23,6 +33,9 @@ def add_expense(expenses, date, amount, category, description):
     
     if category not in CATEGORIES:
         return f"Nezināma kategorija. Izvēlies no: {', '.join(CATEGORIES)}" #Validē kategoriju izvēli. Ar join palīdzību sarasts tiek kopā skaisti sarakstīts ar komatime.
+
+    if not is_valid_date(date):
+        return("Lūdzu, ievadi derīgu datumu: YYYY-MM-DD.")
 
     try:
         amount=float(amount)
