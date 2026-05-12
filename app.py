@@ -1,6 +1,7 @@
 from storage import load_expenses, save_expenses
 from logic import sum_total, add_expense, list_expenses
 from logic import get_available_months, filter_by_month, sum_by_category
+from export import export_to_csv
 from datetime import date
 
 def show_menu():
@@ -111,6 +112,13 @@ def main():
 
             else:
                 print("Nepareizs numurs.")
+
+        elif choice=="6":
+            if export_to_csv(expenses, "expenses.csv"):
+                print("Viss idzevās!")
+
+            else:
+                print("Kaut kas aizgāja ne tā...")
 
         elif choice=="7": 
             print("Visu labu!") 
