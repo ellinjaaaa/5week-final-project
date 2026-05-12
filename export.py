@@ -6,10 +6,10 @@ def export_to_csv(expenses, filepath):
     """ 
     try:
         with open(filepath, "w", newline="", encoding="utf-8-sig") as f: 
-        writer = csv.writer(f) 
-        writer.writerow(["Datums", "Summa", "Kategorija", "Apraksts"]) 
+            writer=csv.writer(f) 
+            writer.writerow(["Datums", "Summa", "Kategorija", "Apraksts"]) 
 
-        for expense in expenses: 
+            for expense in expenses: 
             writer.writerow([ 
                 expense["date"], 
                 f"{expense['amount']:.2f}", 
