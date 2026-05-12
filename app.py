@@ -114,8 +114,10 @@ def main():
                 print("Nepareizs numurs.")
 
         elif choice=="6":
-            if export_to_csv(expenses, "expenses.csv"):
-                print("Viss idzevās!")
+            file=input("Faila nosaukums [izdevumi.csv]: ")
+            if file.endswith(".csv"):
+                export_to_csv(expenses, f"{file}")
+                print(f"Eksportēts: {len(expenses)} ieraksti -> {file}")
 
             else:
                 print("Kaut kas aizgāja ne tā...")
