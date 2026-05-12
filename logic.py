@@ -31,7 +31,7 @@ def add_expense(expenses, date, amount, category, description):
     if not date or not amount or not category or not description:
         return "Nevar būt tukša ievade."
     
-    if category not in CATEGORIES:
+    if category.capitalize() not in CATEGORIES:
         return f"Nezināma kategorija. Izvēlies no: {', '.join(CATEGORIES)}" #Validē kategoriju izvēli. Ar join palīdzību sarasts tiek kopā skaisti sarakstīts ar komatime.
 
     if not is_valid_date(date):
